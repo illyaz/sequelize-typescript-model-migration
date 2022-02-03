@@ -61,6 +61,10 @@ export const parseKeyValue = (key: string, value: any) => {
     return `${key}:${parseObject(value)}`;
   }
 
+  if (typeof value === 'function') {
+    return `${value}`;
+  }
+
   return `${key}:${value}`;
 };
 
