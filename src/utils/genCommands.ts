@@ -25,7 +25,7 @@ export const generateMigrationCommands = (
 
 export const genUpCommands = (model: IExtractedModel) => {
   return [
-    [genCreateTableCommand(model.name, model.columns)],
+    [genCreateTableCommand(model.name, model.columns, model.options)],
     genAddForeignKeysCommands(model.name, model.foreignKeys),
     genAddIndexesCommands(
       model.name,

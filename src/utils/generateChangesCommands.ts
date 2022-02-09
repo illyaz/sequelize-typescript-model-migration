@@ -61,7 +61,7 @@ export const generateChangesCommands = (
           const model: IExtractedModel = dif.rhs;
           upCommands.push({
             order: 0,
-            cmds: [genCreateTableCommand(model.name, model.columns)],
+            cmds: [genCreateTableCommand(model.name, model.columns, model.options)],
           });
           upCommands.push({
             order: 2,
@@ -179,7 +179,7 @@ export const generateChangesCommands = (
           });
           downCommands.push({
             order: 0,
-            cmds: [genCreateTableCommand(dif.path[0], dif.lhs.columns)],
+            cmds: [genCreateTableCommand(dif.path[0], dif.lhs.columns, dif.lhs.options)],
           });
           break;
         }

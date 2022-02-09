@@ -1,9 +1,16 @@
+import { Model } from 'sequelize-typescript';
+import { InitOptions } from 'sequelize/types';
 import {
   loadCreateTableTemplate,
   loadDropTableTemplate,
 } from './loadTemplates';
 
-export const genCreateTableCommand = (tableName: string, columns: {}) => {
+export const genCreateTableCommand = (
+  tableName: string,
+  columns: {},
+  options?: InitOptions<Model<any, any>>,
+) => {
+  console.log(tableName, columns, options);
   let modelText = '';
   for (const [k, v] of Object.entries(columns)) {
     let str = '';
@@ -22,7 +29,8 @@ export const genCreateTableCommand = (tableName: string, columns: {}) => {
   }
   return loadCreateTableTemplate()
     .replace('{tableName}', `'${tableName}'`)
-    .replace('{tableProperties}', `{${modelText}}`);
+    .replace('{tableProperties}', `{${modelText}}`)
+    .replace('{tableOptions}', options ? JSON.stringify(options) : 'undefined');
 };
 
 export const genDropTableCommand = (tableName: string) => {
